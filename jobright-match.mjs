@@ -20,6 +20,8 @@ if (!GROQ_API_KEY) {
   console.error('\x1b[31mError: GROQ_API_KEY is not set in .env or environment.\x1b[0m');
   process.exit(1);
 }
+const GROQ_MODEL = process.env.GROQ_MODEL || 'openai/gpt-oss-120b';
+const EXA_API_KEY = process.env.EXA_API_KEY;
 const TAVILY_API_KEY = process.env.TAVILY_API_KEY;
 
 // ── Colors for CLI ────────────────────────────────────────────────────────────
