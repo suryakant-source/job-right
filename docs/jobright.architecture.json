@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "JobRight — AI Career Operations Architecture",
+    "output": "jobright-architecture.html",
+    "quality_profile": "showcase",
+    "viewBox": [1120, 640],
+    "views": [
+      {
+        "id": "full-pipeline",
+        "label": "End-to-End Pipeline",
+        "focus": ["sources", "scanner", "profile", "ai_core", "tailor", "tracker"],
+        "note": "Complete candidate flow from job scraping through AI evaluation and tracking."
+      },
+      {
+        "id": "ai-matching",
+        "label": "AI Matching & Scoring Core",
+        "focus": ["scanner", "profile", "ai_core", "reject_filter", "tailor"],
+        "note": "1-5 score decision boundary: separating ghost/mismatched listings from high-signal opportunities."
+      }
+    ]
+  },
+  "components": [
+    { "id": "sources", "type": "external", "label": "Job Sources", "sublabel": "Greenhouse, Lever, Ashby, YC", "pos": [38, 250], "size": [140, 68] },
+    { "id": "scanner", "type": "backend", "label": "Scanner & Dedup", "sublabel": "Duplicate & ghost filter", "pos": [230, 250], "size": [140, 68] },
+    { "id": "profile", "type": "database", "label": "Candidate Profile", "sublabel": "profile.yml & evidence", "pos": [430, 110], "size": [140, 68] },
+    { "id": "ai_core", "type": "backend", "label": "AI Matching Engine", "sublabel": "Gemini, Claude, OpenAI", "brand": "google-gemini", "pos": [430, 250], "size": [150, 72] },
+    { "id": "reject_filter", "type": "security", "label": "Do Not Apply", "sublabel": "Score 1–2 (Ghost / Gap)", "pos": [430, 420], "size": [140, 68], "tag": "Saves 100+ hrs" },
+    { "id": "tailor", "type": "frontend", "label": "ATS Resume Tailor", "sublabel": "LaTeX / HTML / PDF", "pos": [670, 250], "size": [140, 68], "tag": "Score 3–5" },
+    { "id": "tracker", "type": "database", "label": "Pipeline Tracker", "sublabel": "Status & latency metrics", "pos": [890, 250], "size": [140, 68] },
+    { "id": "dashboard", "type": "frontend", "label": "Web / TUI Dashboard", "sublabel": "Local-first interface", "pos": [890, 420], "size": [140, 68] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Local-First Privacy Sandbox (Zero Telemetry)", "wraps": ["scanner", "profile", "ai_core", "reject_filter", "tailor", "tracker", "dashboard"] }
+  ],
+  "connections": [
+    { "id": "sources-to-scanner", "from": "sources", "to": "scanner", "label": "scraped JDs", "variant": "emphasis", "labelDy": -28 },
+    { "id": "scanner-to-ai", "from": "scanner", "to": "ai_core", "label": "clean listings", "labelDy": -28 },
+    { "id": "profile-to-ai", "from": "profile", "to": "ai_core", "label": "ground truth", "variant": "security", "fromSide": "bottom", "toSide": "top" },
+    { "id": "ai-to-reject", "from": "ai_core", "to": "reject_filter", "label": "Score 1-2", "variant": "dashed", "fromSide": "bottom", "toSide": "top" },
+    { "id": "ai-to-tailor", "from": "ai_core", "to": "tailor", "label": "Score 3-5", "variant": "emphasis", "labelDy": -28 },
+    { "id": "tailor-to-tracker", "from": "tailor", "to": "tracker", "label": "generated CV", "labelDy": -28 },
+    { "id": "tracker-to-dashboard", "from": "tracker", "to": "dashboard", "label": "live sync", "fromSide": "bottom", "toSide": "top", "labelDy": 24 }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Local First", "items": ["100% private: no data sent to 3rd party databases", "Keys stored locally on your machine"] },
+    { "dot": "emerald", "title": "Signal Over Volume", "items": ["1–5 Structured Match Score eliminates spam applications", "Custom ATS tailoring for high-fit roles"] }
+  ]
+}

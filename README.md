@@ -37,7 +37,11 @@ Running directly on your local machine, **JobRight** analyzes listings with rigo
 ## 🏗️ Architecture & Workflow
 
 <p align="center">
-  <img src="docs/architecture.svg" alt="JobRight Architecture & Workflow" width="100%" />
+  <img src="docs/architecture.png" alt="JobRight Architecture & Workflow" width="100%" />
+</p>
+
+<p align="center">
+  <sub>✨ <strong>Explore Interactive System Diagram:</strong> <a href="docs/jobright-architecture.html">Open Interactive HTML ↗</a></sub>
 </p>
 
 ---
