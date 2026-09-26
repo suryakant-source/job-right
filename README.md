@@ -36,16 +36,9 @@ Running directly on your local machine, **JobRight** analyzes listings with rigo
 
 ## 🏗️ Architecture & Workflow
 
-```mermaid
-flowchart TD
-    A["Job Portals & Feeds<br/>(Greenhouse, Lever, Ashby, YC, HN)"] --> B["Scanner Engine<br/>(Deduplication & Repost Check)"]
-    B --> C["Candidate Profile & History<br/>(profile.yml & credentials)"]
-    C --> D{"AI Evaluation Engine<br/>(Gemini / OpenAI / Claude / Ollama)"}
-    D -->|Score 1-2| E["🚩 Reject / Ghost Listing<br/>(Save time & do not apply)"]
-    D -->|Score 3-5| F["✨ High Match Recommendation<br/>(A-H Deep Analysis Report)"]
-    F --> G["Tailored Resume & Cover Letter<br/>(ATS-Verified PDF/LaTeX)"]
-    G --> H["Pipeline Tracker<br/>(Status, Latency & Follow-ups)"]
-```
+<p align="center">
+  <img src="docs/architecture.svg" alt="JobRight Architecture & Workflow" width="100%" />
+</p>
 
 ---
 
