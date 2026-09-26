@@ -36,13 +36,17 @@ Running directly on your local machine, **JobRight** analyzes listings with rigo
 
 ## 🏗️ Architecture & Workflow
 
-<p align="center">
-  <img src="docs/architecture.png" alt="JobRight Architecture & Workflow" width="100%" />
-</p>
+The JobRight pipeline operates in 5 deterministic, local-first stages:
 
-<p align="center">
-  <sub>✨ <strong>Explore Interactive System Diagram:</strong> <a href="docs/jobright-architecture.html">Open Interactive HTML ↗</a></sub>
-</p>
+1. **🌐 Job Sources:** Ingests live listings across Greenhouse, Lever, Ashby, Workday, Y-Combinator, and Hacker News.
+2. **⚡ Scanner & Deduplication:** Removes duplicate postings, catches repetitive reposts, and filters out stale/ghost jobs.
+3. **🧠 AI Evaluation Engine:** Compares job requirements against your local `profile.yml` using Google Gemini, Claude, OpenAI, or offline Ollama.
+4. **🎯 Scoring Decision Boundary:**
+   * **Score 1–2 (Do Not Apply):** Flags major qualification gaps and toxic criteria to protect your time and energy.
+   * **Score 3–5 (Strategic Apply):** Generates an in-depth A–H match report with ATS-tailored resume and cover letter.
+5. **📊 Pipeline Tracker:** Manages submission states, interview stages, follow-up alerts, and rejection latencies.
+
+> 💡 **Interactive System Map:** [Explore the Interactive Architecture Diagram (`docs/jobright-architecture.html`)](docs/jobright-architecture.html)
 
 ---
 
